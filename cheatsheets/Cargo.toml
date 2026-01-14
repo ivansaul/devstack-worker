@@ -1,0 +1,23 @@
+[package]
+name = "cheatsheets"
+version = "0.1.0"
+edition = "2024"
+authors = ["ivansaul"]
+
+[dependencies]
+anyhow.workspace = true
+cached.workspace = true
+futures.workspace = true
+gray_matter.workspace = true
+markdown.workspace = true
+mdast_util_to_markdown.workspace = true
+reqwest.workspace = true
+rstest.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_path_to_error.workspace = true
+serde_with.workspace = true
+serde_yml.workspace = true
+sqlx.workspace = true
+thiserror.workspace = true
+tokio.workspace = true

@@ -1,0 +1,11 @@
+name = "devstack"
+main = "build/index.js"
+compatibility_date = "2026-01-10"
+
+[build]
+command = "cargo install -q worker-build@^0.7 && worker-build --release"
+
+[[d1_databases]]
+binding = "CHEATSHEETS"
+database_name = "CHEATSHEETS"
+database_id = "1febce9a-c18e-4c44-9276-c991c8f3f362"

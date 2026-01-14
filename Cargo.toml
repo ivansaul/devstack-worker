@@ -1,0 +1,44 @@
+[package]
+name = "devstack"
+version = "0.1.0"
+edition = "2021"
+authors = ["ivansaul"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+serde_with.workspace = true
+thiserror.workspace = true
+worker.workspace = true
+worker-macros.workspace = true
+
+[workspace]
+members = [".", "cheatsheets"]
+
+[workspace.dependencies]
+anyhow = "1.0.100"
+cached = { version = "0.56.0", features = ["async"] }
+futures = "0.3.31"
+gray_matter = "0.3.2"
+markdown = "1.0.0"
+mdast_util_to_markdown = "0.0.2"
+reqwest = { version = "0.13.1", features = ["json"] }
+rstest = "0.26.1"
+serde = "1.0.228"
+serde_json = "1.0.149"
+serde_path_to_error = "0.1.20"
+serde_with = { version = "3.16.1" , features = ["json"] }
+serde_yml = "0.0.12"
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite"] }
+thiserror = "2.0.17"
+tokio = { version = "1.48.0", features = ["macros", "rt-multi-thread"] }
+worker = { version = "0.7", features = ["d1"]  }
+worker-macros = { version = "0.7" }
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
