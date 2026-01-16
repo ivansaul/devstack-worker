@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install sqlite
-        uses: actions/setup-sqlite@v1.2.2
+        uses: ccorsi/setup-sqlite@v1
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
