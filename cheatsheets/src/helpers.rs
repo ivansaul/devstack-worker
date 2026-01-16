@@ -8,7 +8,7 @@ where
     D: Deserializer<'de>,
 {
     let value = String::deserialize(deserializer)?;
-    let re = regex::Regex::new(r"#([0-9a-fA-F]{6})").map_err(|e| serde::de::Error::custom(e))?;
+    let re = regex::Regex::new(r"#([0-9a-fA-F]{6})").map_err(serde::de::Error::custom)?;
     match re.captures(&value) {
         Some(cap) => Ok(Some(cap[0].to_string())),
         None => Ok(None),
