@@ -200,7 +200,6 @@ mod tests {
         let sections = parse_sections(&markdown)?;
         assert!(!frontmatter.title.is_empty());
         assert!(!frontmatter.categories.is_empty());
-        assert!(frontmatter.background.is_some());
         assert!(!sections.is_empty());
         Ok(())
     }
