@@ -22,7 +22,9 @@ jobs:
           fetch-depth: 0
 
       - name: Install sqlite
-        uses: ccorsi/setup-sqlite@v1
+        run: |
+          sudo apt update
+          sudo apt install -y sqlite3
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
