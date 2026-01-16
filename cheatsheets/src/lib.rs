@@ -122,7 +122,18 @@ async fn fetch_markdown(id: &str) -> Result<String> {
     let client = Client::builder().user_agent(USER_AGENT).build()?;
     let response = client.get(&url).send().await?.error_for_status()?;
     let content = response.text().await?;
+    let content = clean_markdown(&content)?;
     Ok(content)
+}
+
+fn clean_markdown(markdown: &str) -> Result<String> {
+    let mut cleaned = markdown.to_string();
+    for (pattern, replacement) in REPLACEMENT_RULES.iter() {
+        let re = regex::Regex::new(pattern)
+            .map_err(|e| Error::ParseError(format!("Error parsing regex: {}", e)))?;
+        cleaned = re.replace_all(&cleaned, *replacement).to_string();
+    }
+    Ok(cleaned)
 }
 
 const GH_API_ICON_DIR: &str =
@@ -135,6 +146,44 @@ const USER_AGENT: &str = "reference-worker/1.0 (+https://github.com/Fechin/refer
 
 const DEFAULT_ICON_URL: &str =
     "https://raw.githubusercontent.com/Fechin/reference/main/source/assets/icon/todoist.svg";
+
+type Rule = (&'static str, &'static str);
+
+const REPLACEMENT_RULES: &[Rule] = &[
+    // Remove markdown classes / attributes
+    (CSS_PATTERN, ""),
+    // HTML → Markdown
+    (r"(?s)<code>(.*?)</code>", "`$1`"),
+    (r"(?s)<yel>(.*?)</yel>", "$1"),
+];
+
+const CSS_PATTERN: &str = r#"(?x)
+    \{
+        \s*
+        (?:
+            \.(?:cols|rows|col-span|row-span)-\d+
+          | \.(?:primary|secondary|wrap|shortcuts|bold-first|plus-first|left-text|no-wrap|show-header|headers|link-arrow)
+          | \.(?:marker-(?:none|round|timeline))
+          | \.(?:style-[^\s}]+)
+        )
+        (?:
+            \s+
+            (?:
+                \.(?:cols|rows|col-span|row-span)-\d+
+              | \.(?:primary|secondary|wrap|shortcuts|bold-first|plus-first|left-text|no-wrap|show-header|headers|link-arrow)
+              | \.(?:marker-(?:none|round|timeline))
+              | \.(?:style-[^\s}]+)
+            )
+        )*
+        \s*
+    \}
+    |
+    <!--\s*(?:prettier-ignore|rehype:[^>]+)\s*-->
+    |
+    [Ss]ee:\s*\[[^\]]+\]\(\#[^)]+\)
+    |
+    data-tooltip=
+    "#;
 
 #[cfg(test)]
 mod tests {
@@ -164,6 +213,23 @@ mod tests {
     async fn test_get_icon_url(#[case] id: &str) -> anyhow::Result<()> {
         let icon_url = get_icon_url(id).await?;
         assert!(icon_url.contains(id));
+        Ok(())
+    }
+
+    #[rstest::rstest]
+    #[case("{.cols-1}", "")]
+    #[case("{.marker-timeline}", "")]
+    #[case("{.row-span-3}", "")]
+    #[case("{.style-bold}", "")]
+    #[case("{.row-span-1 .col-span-2}", "")]
+    #[case("see: [Example](#example)", "")]
+    #[case("<!-- prettier-ignore -->", "")]
+    #[case("<!-- comment -->", "<!-- comment -->")]
+    #[case("<code>rust</code> code", "`rust` code")]
+    #[test]
+    fn test_clean_markdown(#[case] input: &str, #[case] expected: &str) -> anyhow::Result<()> {
+        let cleaned = clean_markdown(input)?;
+        assert_eq!(cleaned, expected);
         Ok(())
     }
 }
