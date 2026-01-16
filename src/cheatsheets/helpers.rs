@@ -1,4 +1,4 @@
-use serde::{de::DeserializeOwned, Deserialize, Deserializer};
+use serde::{Deserialize, Deserializer, de::DeserializeOwned};
 use serde_json::Value;
 
 pub fn vec_or_json<'de, D, T>(deserializer: D) -> Result<Vec<T>, D::Error>
