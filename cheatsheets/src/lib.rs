@@ -1,4 +1,5 @@
 pub mod error;
+pub(crate) mod helpers;
 pub mod models;
 
 use crate::{
@@ -30,6 +31,7 @@ pub async fn parse_markdown(id: &str) -> Result<Cheatsheet> {
         categories: frontmatter.categories,
         label: frontmatter.label,
         icon: Some(icon),
+        background: frontmatter.background,
         sections,
     };
     Ok(cheatsheet)
@@ -149,6 +151,7 @@ mod tests {
         let sections = parse_sections(&markdown)?;
         assert!(!frontmatter.title.is_empty());
         assert!(!frontmatter.categories.is_empty());
+        assert!(frontmatter.background.is_some());
         assert!(!sections.is_empty());
         Ok(())
     }

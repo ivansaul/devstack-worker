@@ -1,3 +1,4 @@
+use crate::helpers::as_hex_color;
 use serde::{Deserialize, Serialize};
 use serde_with::{DefaultOnError, serde_as};
 
@@ -10,6 +11,7 @@ pub struct Cheatsheet {
     pub intro: Option<String>,
     pub label: Option<String>,
     pub icon: Option<String>,
+    pub background: Option<String>,
     pub sections: Vec<Section>,
 }
 
@@ -29,6 +31,8 @@ pub(crate) struct CheatsheetMeta {
     pub categories: Vec<String>,
     pub intro: Option<String>,
     pub label: Option<String>,
+    #[serde(deserialize_with = "as_hex_color")]
+    pub background: Option<String>,
 }
 
 #[derive(Deserialize)]

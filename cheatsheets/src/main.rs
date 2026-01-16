@@ -67,6 +67,7 @@ async fn create_table(pool: &Pool<Sqlite>) -> Result<()> {
         intro TEXT,
         label TEXT,
         icon TEXT,
+        background TEXT,
         sections JSON NOT NULL
     );
     "#,
@@ -81,8 +82,8 @@ async fn insert_row(pool: &Pool<Sqlite>, cheatsheet: &Cheatsheet) -> Result<()> 
     sqlx::query(
         r#"
     INSERT INTO cheatsheets
-    (id, title, tags, categories, intro, label, icon, sections)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+    (id, title, tags, categories, intro, label, icon, background, sections)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
     "#,
     )
     .bind(&cheatsheet.id)
@@ -92,6 +93,7 @@ async fn insert_row(pool: &Pool<Sqlite>, cheatsheet: &Cheatsheet) -> Result<()> 
     .bind(&cheatsheet.intro)
     .bind(&cheatsheet.label)
     .bind(&cheatsheet.icon)
+    .bind(&cheatsheet.background)
     .bind(serde_json::to_string(&cheatsheet.sections)?)
     .execute(pool)
     .await?;

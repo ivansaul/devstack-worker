@@ -13,9 +13,12 @@ impl CheatsheetRepository {
     }
 
     pub async fn list_meta(&self) -> Result<Vec<CheatsheetMetaRow>, ApiError> {
-        let stmt = self
-            .db
-            .prepare("SELECT id, title, tags, categories, intro, label, icon FROM cheatsheets");
+        let stmt = self.db.prepare(
+            r#"
+            SELECT id, title, tags, categories, intro, label, icon, background
+            FROM cheatsheets
+            "#,
+        );
         let query = stmt.bind(&[])?;
         let rows = query.all().await?;
         let records = rows.results::<CheatsheetMetaRow>()?;

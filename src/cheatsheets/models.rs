@@ -17,6 +17,8 @@ pub struct CheatsheetMetaRow {
     pub label: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub background: Option<String>,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -33,6 +35,8 @@ pub struct CheatsheetRow {
     pub label: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub icon: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub background: Option<String>,
     #[serde(default, deserialize_with = "vec_or_json")]
     pub sections: Vec<SectionRow>,
 }
