@@ -102,7 +102,16 @@ async fn insert_row(pool: &Pool<Sqlite>, cheatsheet: &Cheatsheet) -> Result<()> 
 
 fn export_sql(db_path: &str, out: &str) -> Result<()> {
     let output = Command::new("sqlite3").arg(db_path).arg(".dump").output()?;
-    std::fs::write(out, output.stdout)?;
+    let dump = String::from_utf8(output.stdout)?;
+    let dump = dump
+        .lines()
+        .filter(|line| {
+            let l = line.trim();
+            l != "BEGIN TRANSACTION;" && l != "COMMIT;" && !l.starts_with("PRAGMA foreign_keys")
+        })
+        .collect::<Vec<&str>>()
+        .join("\n");
+    std::fs::write(out, dump)?;
     Ok(())
 }
 
