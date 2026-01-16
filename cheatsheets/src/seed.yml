@@ -1,0 +1,30 @@
+- id: rust
+  enabled: true
+  note: some note
+
+- id: swift
+  enabled: true
+
+- id: python
+  enabled: true
+
+- id: java
+  enabled: true
+
+- id: go
+  enabled: true
+
+- id: cpp
+  enabled: true
+
+- id: javascript
+  enabled: true
+
+- id: typescript
+  enabled: true
+
+- id: git
+  enabled: true
+
+- id: vim
+  enabled: true
