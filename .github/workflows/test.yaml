@@ -1,0 +1,41 @@
+name: Test
+
+on:
+  workflow_call:
+    pull_request:
+      branches: [master, develop]
+      types: [opened, synchronize, reopened]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        rust: [stable]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ matrix.rust }}
+
+      - name: Cache Cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Cargo fmt
+        run: cargo fmt --all -- --check
+
+      - name: Cargo clippy
+        run: cargo clippy --all --all-targets --all-features -- -D warnings
+
+      - name: Run Tests
+        run: cargo test --workspace --all-targets --all-features
+
+      - name: Check Build
+        run: cargo build --all --verbose
