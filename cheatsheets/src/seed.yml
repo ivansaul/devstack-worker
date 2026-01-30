@@ -1,30 +1,319 @@
-- id: rust
-  enabled: true
-  note: some note
+#
+# programming
+#
 
-- id: swift
-  enabled: true
-
-- id: python
+- id: socket-io
   enabled: true
 
-- id: java
+- id: bash
+  enabled: true
+
+- id: powershell
+  enabled: true
+
+- id: markdown
   enabled: true
 
 - id: go
   enabled: true
 
-- id: cpp
+- id: sass
+  enabled: true
+
+- id: python
   enabled: true
 
 - id: javascript
   enabled: true
 
+- id: npm
+  enabled: true
+
+- id: jquery
+  enabled: true
+
+- id: css3
+  enabled: true
+
+- id: yaml
+  enabled: true
+
+- id: toml
+  enabled: true
+
+- id: docker
+  enabled: true
+
+- id: php
+  enabled: true
+
+- id: java
+  enabled: true
+
+- id: cpp
+  enabled: true
+
+- id: graphql
+  enabled: true
+
+- id: html
+  enabled: false
+  note: does not support preview elements
+
+- id: json
+  enabled: true
+
+- id: dart
+  enabled: true
+
+- id: laravel
+  enabled: true
+
+- id: cs
+  enabled: true
+
+- id: rust
+  enabled: true
+
+- id: c
+  enabled: true
+
+- id: ini
+  enabled: true
+
+- id: latex
+  enabled: false
+  note: does not support Latex preview
+
+- id: matlab
+  enabled: false
+  note: Cloudflare D1 -> [ERROR] statement too long SQLITE_TOOBIG
+
+- id: es6
+  enabled: true
+
+- id: kubernetes
+  enabled: true
+
+- id: express
+  enabled: true
+
+- id: kotlin
+  enabled: true
+
+- id: swift
+  enabled: true
+
+- id: ejs
+  enabled: true
+
+- id: react
+  enabled: true
+
+- id: hook
+  enabled: true
+
+- id: terraform
+  enabled: true
+
+- id: ruby
+  enabled: true
+
+- id: selenium
+  enabled: true
+
+- id: django
+  enabled: true
+
+- id: perl
+  enabled: true
+
 - id: typescript
+  enabled: true
+
+- id: canvas
+  enabled: true
+
+- id: arduino-programming
+  enabled: true
+
+- id: unity-shader-graph
+  enabled: false
+
+- id: ocaml
+  enabled: true
+
+- id: fastapi
+  enabled: true
+
+- id: flask
+  enabled: true
+
+- id: htmx
+  enabled: true
+
+- id: vue
+  enabled: true
+
+- id: windows-cmd
+  enabled: true
+
+- id: symfony
+  enabled: true
+
+- id: svelte
+  enabled: true
+
+- id: nix
+  enabled: true
+
+- id: lua
+  enabled: true
+
+- id: vhdl
+  enabled: true
+
+- id: nim
+  enabled: true
+
+  #
+  # toolkit
+  #
+
+- id: regex
+  enabled: true
+
+- id: vim
+  enabled: true
+
+- id: emmet
+  enabled: true
+
+- id: xpath
+  enabled: true
+
+- id: homebrew
+  enabled: true
+
+- id: github-actions
+  enabled: true
+
+- id: github-cli
+  enabled: true
+
+#
+# os
+#
+
+- id: alpine-linux
+  enabled: true
+
+#
+# linux commands
+#
+
+- id: gnupg
   enabled: true
 
 - id: git
   enabled: true
 
-- id: vim
+- id: grep
+  enabled: true
+
+- id: nc
+  enabled: true
+
+- id: openssl
+  enabled: true
+
+- id: cron
+  enabled: true
+
+- id: sed
+  enabled: true
+
+- id: find
+  enabled: true
+
+- id: awk
+  enabled: true
+
+- id: screen
+  enabled: false
+  note: shortcuts cheetsheet
+
+- id: netstat
+  enabled: true
+
+- id: ssh
+  enabled: true
+
+- id: lsof
+  enabled: true
+
+- id: tmux
+  enabled: true
+
+- id: chmod
+  enabled: false
+  note: remove widget <widget name="chmod"/>
+
+- id: pm2
+  enabled: true
+
+- id: curl
+  enabled: true
+
+- id: pandoc
+  enabled: true
+
+- id: taskset
+  enabled: true
+
+- id: sdkman
+  enabled: true
+
+- id: systemd
+  enabled: true
+
+- id: nmap
+  enabled: true
+
+- id: telnet
+  enabled: true
+
+- id: nginx
+  enabled: true
+
+#
+# python
+#
+
+- id: numpy
+  enabled: true
+
+- id: pandas
+  enabled: true
+
+- id: matplotlib
+  enabled: true
+
+#
+# database
+#
+
+- id: mysql
+  enabled: true
+
+- id: redis
+  enabled: true
+
+- id: postgres
+  enabled: true
+
+- id: neo4j
+  enabled: true
+
+- id: mongodb
   enabled: true
