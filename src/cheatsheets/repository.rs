@@ -17,6 +17,7 @@ impl CheatsheetRepository {
             r#"
             SELECT id, title, tags, categories, intro, label, icon, background
             FROM cheatsheets
+            ORDER BY title ASC
             "#,
         );
         let query = stmt.bind(&[])?;
