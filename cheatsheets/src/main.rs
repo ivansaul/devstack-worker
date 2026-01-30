@@ -17,10 +17,11 @@ async fn main() -> Result<()> {
     let ids = enabled_cheatsheet_ids()?;
     let mut results = Vec::new();
     let mut stream = stream::iter(ids.iter())
-        .map(|id| cheatsheets::parse_markdown(id))
+        .map(|id| async move { (id, cheatsheets::parse_markdown(id).await) })
         .buffer_unordered(10);
 
-    while let Some(res) = stream.next().await {
+    while let Some((id, res)) = stream.next().await {
+        println!("[{id}]");
         results.push(res?);
     }
 
