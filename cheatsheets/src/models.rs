@@ -25,13 +25,14 @@ pub struct Section {
 #[derive(Debug, Deserialize)]
 pub(crate) struct CheatsheetMeta {
     pub title: String,
+    #[serde(default)]
     #[serde_as(deserialize_as = "DefaultOnError")]
     pub tags: Vec<String>,
     #[serde_as(deserialize_as = "DefaultOnError")]
     pub categories: Vec<String>,
     pub intro: Option<String>,
     pub label: Option<String>,
-    #[serde(deserialize_with = "as_hex_color")]
+    #[serde(default, deserialize_with = "as_hex_color")]
     pub background: Option<String>,
 }
 

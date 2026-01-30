@@ -193,6 +193,8 @@ mod tests {
     #[case("rust")]
     #[case("python")]
     #[case("swift")]
+    #[case("gnupg")]
+    #[case("find")]
     #[tokio::test]
     async fn test_parse_frontmatter_section(#[case] id: &str) -> anyhow::Result<()> {
         let markdown = fetch_markdown(id).await?;
