@@ -183,6 +183,8 @@ const CSS_PATTERN: &str = r#"(?x)
     [Ss]ee:\s*\[[^\]]+\]\(\#[^)]+\)
     |
     data-tooltip=
+    |
+    <widget\b[^>]*\bname\s*=\s*"[^"]*"\s*\/>
     "#;
 
 #[cfg(test)]

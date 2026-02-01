@@ -256,8 +256,7 @@
   enabled: true
 
 - id: chmod
-  enabled: false
-  note: remove widget <widget name="chmod"/>
+  enabled: true
 
 - id: pm2
   enabled: true
