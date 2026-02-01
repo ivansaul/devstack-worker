@@ -1,3 +1,4 @@
+use serde::Serialize;
 use worker::Response;
 
 #[derive(Debug, thiserror::Error)]
@@ -15,11 +16,24 @@ impl From<worker::Error> for ApiError {
     }
 }
 
+#[derive(Debug, Serialize)]
+struct ErrorResponse {
+    error: String,
+}
+
 impl From<ApiError> for Result<Response, worker::Error> {
     fn from(value: ApiError) -> Self {
         match value {
-            ApiError::NotFound(msg) => Response::error(msg, 404),
-            ApiError::InternalServerError(msg) => Response::error(msg, 500),
+            ApiError::NotFound(msg) => json_with_status(&ErrorResponse { error: msg }, 404),
+            ApiError::InternalServerError(msg) => {
+                json_with_status(&ErrorResponse { error: msg }, 500)
+            }
         }
     }
+}
+
+fn json_with_status<T: Serialize>(value: &T, status: u16) -> Result<Response, worker::Error> {
+    let mut resp = Response::from_json(value)?;
+    resp = resp.with_status(status);
+    Ok(resp)
 }
