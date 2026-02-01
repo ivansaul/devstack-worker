@@ -26,7 +26,7 @@ impl CheatsheetRepository {
         Ok(records)
     }
 
-    pub async fn fetch_by_id(&self, id: &str) -> Result<CheatsheetRow, ApiError> {
+    pub async fn get(&self, id: &str) -> Result<CheatsheetRow, ApiError> {
         let stmt = self.db.prepare("SELECT * FROM cheatsheets WHERE id = ?");
         let query = stmt.bind(&[id.into()])?;
         let record = query.first::<CheatsheetRow>(None).await?.ok_or_else(|| {
